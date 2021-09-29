@@ -1,29 +1,16 @@
-import Nav from "react-bootstrap/Nav"
 import { MyNav, NavWrapper } from "./styled"
 
 const NavBar = () => {
   return (
     <NavWrapper>
       <MyNav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link href="/home" className="mt-3 text-white">
-          Home
-        </Nav.Link>
-        <Nav.Link eventKey="link-1" className="mt-4 text-white">
-          Chart
-        </Nav.Link>
-        <Nav.Link eventKey="link-2" className="mt-4 text-white">
-          Alerts
-        </Nav.Link>
-        <Nav.Link eventKey="link-3" className="mt-4 text-white">
-          Watch List
-        </Nav.Link>
-        <Nav.Link eventKey="link-4" className="mt-4 text-white">
-          Stats
-        </Nav.Link>
+        <MyNav.Link>Home</MyNav.Link>
+        <MyNav.Link>Chart</MyNav.Link>
+        <MyNav.Link>Alerts</MyNav.Link>
+        <MyNav.Link>Watch List</MyNav.Link>
+        <MyNav.Link>Stats</MyNav.Link>
 
-        <Nav.Link eventKey="link-5" className="mt-auto mb-3 text-white">
-          Profile
-        </Nav.Link>
+        <MyNav.Link className="mt-auto mb-4">Profile</MyNav.Link>
       </MyNav>
     </NavWrapper>
   )
