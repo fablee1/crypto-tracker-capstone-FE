@@ -15,23 +15,29 @@ export const Divider = styled.div`
 export const TopBarBlock = styled.div`
   height: 100%;
   padding: 10px;
+  margin: 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `
 
-export const TopBarBlockHeader = styled.p`
+interface TopBarProps {
+  secondaryBlock?: boolean
+}
+
+export const TopBarBlockHeader = styled.p<TopBarProps>`
   font-size: 20px;
-  font-weight: 600;
+  font-weight: ${(props) => (props.secondaryBlock ? 400 : 600)};
+  text-align: ${(props) => (props.secondaryBlock ? "center" : "left")};
   margin: 0;
   line-height: 1;
   color: rgb(143, 143, 149);
 `
 
-export const TopBarBlockText = styled.p`
-  font-size: 40px;
-  font-weight: 700;
+export const TopBarBlockText = styled.p<TopBarProps>`
+  font-size: ${(props) => (props.secondaryBlock ? "24px" : "40px")};
+  font-weight: ${(props) => (props.secondaryBlock ? 500 : 700)};
   margin: 0;
   line-height: 1;
-  color: white;
+  color: ${(props) => (props.secondaryBlock ? "rgb(119, 192, 96)" : "white")};
 `

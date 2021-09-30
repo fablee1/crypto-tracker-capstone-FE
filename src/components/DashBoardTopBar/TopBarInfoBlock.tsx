@@ -1,10 +1,18 @@
 import { TopBarBlock, TopBarBlockHeader, TopBarBlockText } from "./styled"
 
-const TopBarInfoBlock = ({ header, text }: { header: string; text: string }) => {
+const TopBarInfoBlock = ({
+  header,
+  text,
+  secondaryBlock,
+}: {
+  header: string
+  text: string
+  secondaryBlock?: boolean
+}) => {
   return (
     <TopBarBlock>
-      <TopBarBlockHeader>{header}</TopBarBlockHeader>
-      <TopBarBlockText>{text}</TopBarBlockText>
+      <TopBarBlockHeader secondaryBlock={secondaryBlock}>{header}</TopBarBlockHeader>
+      <TopBarBlockText secondaryBlock={secondaryBlock}>{text}</TopBarBlockText>
     </TopBarBlock>
   )
 }
