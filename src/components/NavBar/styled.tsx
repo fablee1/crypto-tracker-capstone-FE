@@ -7,6 +7,7 @@ export const NavWrapper = styled.div`
   color: white;
   height: 100%;
   width: 80px;
+  position: fixed;
 `
 
 export const MyNav = styled(Nav)`
