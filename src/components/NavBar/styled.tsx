@@ -17,6 +17,8 @@ export const MyNav = styled(Nav)`
 const MyNavLink = styled(Link)`
   margin-top: 35px;
   color: gray;
+  display: flex;
+  justify-content: center;
   &:hover {
     color: white;
   }

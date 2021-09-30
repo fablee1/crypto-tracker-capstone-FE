@@ -9,6 +9,6 @@ export const MainWrapper = styled.div`
 export const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 15px;
+  padding: 16px;
   margin-left: 80px;
 `
