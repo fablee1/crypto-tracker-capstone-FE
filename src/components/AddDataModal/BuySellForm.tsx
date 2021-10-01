@@ -1,22 +1,99 @@
 import { useEffect, useState } from "react"
 import Form from "react-bootstrap/Form"
-import Select from "react-select"
+import Select, { components } from "react-select"
+import AsyncSelect from "react-select/async"
+import backend from "../../backend"
+import { AxiosResponse } from "axios"
+
+const { Option } = components
 
 const BuySellForm = ({ sell }: { sell?: boolean }) => {
-  const exchangeOptions = [
-    { label: "first", value: "1" },
-    { label: "second", value: "2" },
-  ]
+  const [exchangeOptions, setExchangeOptions] = useState<
+    { label: string; value: string; image: string }[]
+  >([])
 
-  const forOptions = [
-    { label: "first", value: "1" },
-    { label: "second", value: "2" },
-  ]
+  const [coinsOptions, setCoinsOptions] = useState<
+    { label: string; value: string; image: string; symbol: string }[]
+  >([])
+
+  useEffect(() => {
+    const getExchanges = async () => {
+      const { data }: AxiosResponse<{ name: string; id: string; image: string }[]> =
+        await backend.get("exchanges")
+      const options = data.map((e) => {
+        return { label: e.name, value: e.id, image: e.image }
+      })
+      setExchangeOptions(options)
+    }
+    const getCoins = async () => {
+      const {
+        data,
+      }: AxiosResponse<
+        {
+          name: string
+          id: string
+          image: string
+          market_cap_rank: number
+          symbol: string
+        }[]
+      > = await backend.get("crypto/all")
+      const options = data.map((e) => {
+        return { label: e.name, value: e.id, image: e.image, symbol: e.symbol }
+      })
+      setCoinsOptions(options)
+    }
+    getExchanges()
+    getCoins()
+  }, [])
+
+  const filterExchanges = (query: string) => {
+    return query.length >= 3
+      ? exchangeOptions.filter((ex) =>
+          ex.label.toLowerCase().includes(query.toLowerCase())
+        )
+      : exchangeOptions.slice(0, 30)
+  }
+
+  const loadOptionsExchanges = (query: string) =>
+    new Promise<{ name: string; id: string; image: string }[]>((resolve) => {
+      resolve(filterExchanges(query) as any)
+    })
+
+  const filterCoins = (query: string) => {
+    return query.length >= 3
+      ? coinsOptions.filter(
+          (ex) =>
+            ex.label.toLowerCase().includes(query.toLowerCase()) ||
+            ex.symbol.toLowerCase().includes(query.toLowerCase())
+        )
+      : coinsOptions.slice(0, 30)
+  }
+
+  const loadOptionsCoins = (query: string) =>
+    new Promise<{ name: string; id: string; image: string; symbol: string }[]>(
+      (resolve) => {
+        resolve(filterCoins(query) as any)
+      }
+    )
+
+  const IconOptionExchange = (props: any) => (
+    <Option {...props}>
+      <img src={props.data.image} style={{ width: 18 }} alt={props.data.label} />
+      {props.data.label}
+    </Option>
+  )
+
+  const IconOptionCoins = (props: any) => (
+    <Option {...props}>
+      <img src={props.data.image} style={{ width: 18 }} alt={props.data.label} />
+      {`${props.data.symbol.toUpperCase()} - ${props.data.label}`}
+    </Option>
+  )
 
   const [transaction, setTransaction] = useState({
     type: sell ? "sell" : "buy",
-    exchange: exchangeOptions[0].value,
-    for: forOptions[0].value,
+    exchange: "",
+    for: "",
     total: "0",
     quantity: "0",
     fee: "0",
@@ -33,8 +110,11 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
     <Form>
       <Form.Group className="mb-3">
         <Form.Label>Exchange</Form.Label>
-        <Select
-          options={exchangeOptions}
+        <AsyncSelect
+          cacheOptions
+          defaultOptions={exchangeOptions.slice(0, 30)}
+          loadOptions={loadOptionsExchanges}
+          components={{ Option: IconOptionExchange }}
           onChange={(e) =>
             setTransaction({
               ...transaction,
@@ -45,8 +125,11 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>{sell ? "Sold for" : "Bought with"}</Form.Label>
-        <Select
-          options={forOptions}
+        <AsyncSelect
+          cacheOptions
+          defaultOptions={coinsOptions.slice(0, 30)}
+          loadOptions={loadOptionsCoins}
+          components={{ Option: IconOptionCoins }}
           onChange={(e) =>
             setTransaction({
               ...transaction,
