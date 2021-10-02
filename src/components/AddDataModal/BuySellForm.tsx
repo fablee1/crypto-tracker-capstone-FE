@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { FormEvent, FormEventHandler, useEffect, useState } from "react"
 import Form from "react-bootstrap/Form"
-import Select, { components } from "react-select"
+import Button from "react-bootstrap/Button"
+import { components } from "react-select"
 import AsyncSelect from "react-select/async"
 import backend from "../../backend"
 import { AxiosResponse } from "axios"
@@ -106,8 +107,17 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
     setTransaction({ ...transaction, type: sell ? "sell" : "buy" })
   }, [sell])
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      await backend.post("portfolio/add", transaction)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label>Exchange</Form.Label>
         <AsyncSelect
@@ -189,6 +199,7 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
           onChange={(e) => setTransaction({ ...transaction, notes: e.target.value })}
         />
       </Form.Group>
+      <Button type="submit">Save</Button>
     </Form>
   )
 }
