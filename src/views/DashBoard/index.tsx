@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col"
 import Card from "../../components/Card"
 import DashBoardTopBar from "../../components/DashBoardTopBar"
 import DashBoardTopNav from "../../components/DashBoardTopNav"
+import PortfolioTable from "../../components/PortfolioTable"
 
 const DashBoard = () => {
   return (
@@ -12,7 +13,7 @@ const DashBoard = () => {
       <Row className="h-100 gx-3 gy-3">
         <Col xs={6}>
           <Card title="Holdings">
-            <></>
+            <PortfolioTable />
           </Card>
         </Col>
         <Col xs={6}>
