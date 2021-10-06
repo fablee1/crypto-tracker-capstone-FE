@@ -30,4 +30,5 @@ export interface ICryptoCurrency {
     percentage: number
   }
   last_updated?: Date
+  historical1D?: any
 }

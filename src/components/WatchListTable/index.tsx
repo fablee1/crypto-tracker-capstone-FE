@@ -1,10 +1,10 @@
 import Table from "react-bootstrap/Table"
 import { useAppSelector } from "../../redux/hooks"
-import { selectUserCoins, selectUserPortfolio } from "../../redux/slices/userSlice"
-import PortfolioTableRow from "./portfolioTableRow"
+import { selectUserCoins, selectUserFavourites } from "../../redux/slices/userSlice"
+import WatchListTableRow from "./watchListTableRow"
 
-const PortfolioTable = () => {
-  const userPortfolio = useAppSelector(selectUserPortfolio)
+const WatchListTable = () => {
+  const userFavourites = useAppSelector(selectUserFavourites)
   const userCoins = useAppSelector(selectUserCoins)
 
   return (
@@ -12,24 +12,21 @@ const PortfolioTable = () => {
       <thead>
         <tr>
           <th></th>
-          <th className="text-end">Amount</th>
-          <th className="text-end">Price</th>
-          <th className="text-end">Value</th>
+          <th className="text-center">Price</th>
           <th className="text-center">24h</th>
-          <th className="text-end">ROI</th>
+          <th className="text-center">7d</th>
         </tr>
       </thead>
       <tbody>
-        {userPortfolio.map((c) => {
-          const coin = userCoins[c.coinId]
+        {userFavourites.map((coinId) => {
+          const coin = userCoins[coinId]
 
           return (
-            <PortfolioTableRow
+            <WatchListTableRow
               image={coin.image}
               symbol={coin.symbol}
-              amount={c.amount}
               price={coin.current_price}
-              avgBuyPrice={c.averageBuyPrice}
+              history={coin.historical1D}
               priceChange24h={coin.price_change_24h as number}
               priceChange24hPercentage={
                 coin.price_change_percentage_24h?.toFixed() as string
@@ -42,4 +39,4 @@ const PortfolioTable = () => {
   )
 }
 
-export default PortfolioTable
+export default WatchListTable

@@ -4,6 +4,7 @@ import { ITransaction } from "./transaction"
 export interface IPortfolio {
   coinId: string
   amount: number
+  averageBuyPrice: number
 }
 
 export interface IUser {

@@ -11,6 +11,7 @@ const DashBoardTopBar = () => {
   const userCoins = useAppSelector(selectUserCoins)
 
   const [netWorth, setNetWorth] = useState(0)
+  const [gains, setGains] = useState({ dayGain: 0, sevenDayGain: 0 })
 
   useEffect(() => {
     const nw = userPortfolio.reduce((prev, curr) => {
@@ -20,6 +21,29 @@ const DashBoardTopBar = () => {
         .toNumber()
     }, 0)
     setNetWorth(nw)
+
+    const gains = userPortfolio.reduce(
+      (prev, curr) => {
+        return {
+          dayGain: new BigNumber(curr.amount)
+            .multipliedBy(userCoins[curr.coinId].price_change_24h as number)
+            .plus(prev.dayGain)
+            .toNumber(),
+          sevenDayGain: new BigNumber(
+            userCoins[curr.coinId].current_price -
+              userCoins[curr.coinId].historical1D.at(-7).price
+          )
+            .multipliedBy(curr.amount)
+            .plus(prev.sevenDayGain)
+            .toNumber(),
+        }
+      },
+      {
+        dayGain: 0,
+        sevenDayGain: 0,
+      }
+    )
+    setGains(gains)
   }, [userPortfolio, userCoins])
 
   return (
@@ -27,9 +51,23 @@ const DashBoardTopBar = () => {
       <CardWrapper className="d-flex align-items-center">
         <TopBarInfoBlock header="Net Worth" text={`$${netWorth}`} />
         <Divider />
-        <TopBarInfoBlock header="Value Of Coins" text="$105,164" />
-        <TopBarInfoBlock header="Day's Gain" text="+10% ($12,122)" secondaryBlock />
-        <TopBarInfoBlock header="7d" text="+16% ($12,122)" secondaryBlock />
+        <TopBarInfoBlock header="Value Of Coins" text={`$${netWorth}`} />
+        <TopBarInfoBlock
+          header="Day's Gain"
+          text={`${new BigNumber(gains.dayGain)
+            .dividedBy(netWorth - gains.dayGain)
+            .multipliedBy(100)
+            .toFixed(0)}% ($${gains.dayGain.toFixed(0)})`}
+          secondaryBlock
+        />
+        <TopBarInfoBlock
+          header="7d"
+          text={`${new BigNumber(gains.sevenDayGain)
+            .dividedBy(netWorth - gains.sevenDayGain)
+            .multipliedBy(100)
+            .toFixed(0)}% ($${gains.sevenDayGain.toFixed(0)})`}
+          secondaryBlock
+        />
         <Divider />
         <TopBarInfoBlock header="Invested Fiat" text="$31,971" />
         <TopBarInfoBlock

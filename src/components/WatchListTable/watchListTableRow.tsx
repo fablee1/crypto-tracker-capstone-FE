@@ -1,11 +1,11 @@
 import BigNumber from "bignumber.js"
+import SmallPriceGraph from "./SmallPriceGraph"
 
-interface PortfolioTableRowProps {
+interface WatchListTableRowProps {
   image: string
   symbol: string
-  amount: number
   price: number
-  avgBuyPrice: number
+  history: { timestamp: number; price: number; _id: string }[]
   priceChange24h: number
   priceChange24hPercentage: string
 }
@@ -13,26 +13,18 @@ interface PortfolioTableRowProps {
 const PortfolioTableRow = ({
   image,
   symbol,
-  amount,
   price,
-  avgBuyPrice,
+  history,
   priceChange24h,
   priceChange24hPercentage,
-}: PortfolioTableRowProps) => {
-  const roi = new BigNumber(price)
-    .minus(avgBuyPrice)
-    .dividedBy(avgBuyPrice)
-    .multipliedBy(100)
-    .toFixed(0)
+}: WatchListTableRowProps) => {
   return (
     <tr>
       <td>
         <img src={image} width="24px" alt="" className="me-2" />
         {symbol.toUpperCase()}
       </td>
-      <td className="text-end">{amount}</td>
-      <td className="text-end">{price}</td>
-      <td className="text-end">{new BigNumber(amount).multipliedBy(price).toFixed(0)}</td>
+      <td className="text-center">{price}</td>
       <td className="text-center">
         <span className={priceChange24h < 0 ? "text-danger" : "text-success"}>
           {priceChange24h >= 0 && "+"}
@@ -45,10 +37,9 @@ const PortfolioTableRow = ({
         </span>
         )
       </td>
-      <td
-        className={`text-end ${
-          parseFloat(roi) < 0 ? "text-danger" : "text-success"
-        }`}>{`${roi}%`}</td>
+      <td style={{ maxWidth: "150px" }}>
+        <SmallPriceGraph history={history.slice(-7)} />
+      </td>
     </tr>
   )
 }

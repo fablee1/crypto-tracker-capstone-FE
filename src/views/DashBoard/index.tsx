@@ -4,6 +4,7 @@ import Card from "../../components/Card"
 import DashBoardTopBar from "../../components/DashBoardTopBar"
 import DashBoardTopNav from "../../components/DashBoardTopNav"
 import PortfolioTable from "../../components/PortfolioTable"
+import WatchListTable from "../../components/WatchListTable"
 
 const DashBoard = () => {
   return (
@@ -23,7 +24,7 @@ const DashBoard = () => {
         </Col>
         <Col xs={6}>
           <Card title="Watchlist">
-            <></>
+            <WatchListTable />
           </Card>
         </Col>
         <Col xs={6}>
