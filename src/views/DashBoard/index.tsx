@@ -11,7 +11,7 @@ const DashBoard = () => {
     <>
       <DashBoardTopNav />
       <DashBoardTopBar />
-      <Row className="h-100 gx-3 gy-3">
+      <Row className="gx-3 gy-3" style={{ height: "80%" }}>
         <Col xs={6}>
           <Card title="Holdings">
             <PortfolioTable />

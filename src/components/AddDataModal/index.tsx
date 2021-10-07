@@ -14,12 +14,12 @@ const AddDataModal = ({ show, close }: AddDataModalProps) => {
   const [type, setType] = useState("buy")
 
   return (
-    <Modal show={show} onHide={close}>
+    <Modal show={show} onHide={close} dialogClassName="data-add-modal">
       <Modal.Header closeButton>
         <Modal.Title>Add Your Data</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ButtonGroup aria-label="Basic example">
+        <ButtonGroup className="d-flex justify-content-center">
           <Button variant="success" onClick={() => setType("buy")}>
             Buy
           </Button>

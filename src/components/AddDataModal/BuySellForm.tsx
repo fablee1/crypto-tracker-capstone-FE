@@ -17,6 +17,8 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
     { label: string; value: string; image: string; symbol: string }[]
   >([])
 
+  const [moreSettingsOpen, setMoreSettingsOpen] = useState(false)
+
   useEffect(() => {
     const getExchanges = async () => {
       const { data }: AxiosResponse<{ name: string; id: string; image: string }[]> =
@@ -183,22 +185,25 @@ const BuySellForm = ({ sell }: { sell?: boolean }) => {
           onChange={(e) => setTransaction({ ...transaction, date: e.target.value })}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Time</Form.Label>
-        <Form.Control
-          type="time"
-          value={transaction.time}
-          onChange={(e) => setTransaction({ ...transaction, time: e.target.value })}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Notes</Form.Label>
-        <Form.Control
-          as="textarea"
-          value={transaction.notes}
-          onChange={(e) => setTransaction({ ...transaction, notes: e.target.value })}
-        />
-      </Form.Group>
+      <div onClick={() => setMoreSettingsOpen(!moreSettingsOpen)}>More Settings</div>
+      <div className={moreSettingsOpen ? "" : "d-none"}>
+        <Form.Group className="mb-3">
+          <Form.Label>Time</Form.Label>
+          <Form.Control
+            type="time"
+            value={transaction.time}
+            onChange={(e) => setTransaction({ ...transaction, time: e.target.value })}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Notes</Form.Label>
+          <Form.Control
+            as="textarea"
+            value={transaction.notes}
+            onChange={(e) => setTransaction({ ...transaction, notes: e.target.value })}
+          />
+        </Form.Group>
+      </div>
       <Button type="submit">Save</Button>
     </Form>
   )
