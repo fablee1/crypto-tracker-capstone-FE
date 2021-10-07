@@ -61,6 +61,7 @@ export const selectUserData = (state: RootState) => state.user.me
 export const selectUserCoins = (state: RootState) => state.user.coins
 export const selectUserPortfolio = (state: RootState) => state.user.me.portfolio
 export const selectUserFavourites = (state: RootState) => state.user.me.favourites
+export const selectUserTransactions = (state: RootState) => state.user.me.transactions
 
 export const { updatePrices } = userSlice.actions
 
