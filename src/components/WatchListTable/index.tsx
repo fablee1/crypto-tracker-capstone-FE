@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Table from "react-bootstrap/Table"
 import { useAppSelector } from "../../redux/hooks"
 import { selectUserCoins, selectUserFavourites } from "../../redux/slices/userSlice"
@@ -7,6 +8,8 @@ const WatchListTable = () => {
   const userFavourites = useAppSelector(selectUserFavourites)
   const userCoins = useAppSelector(selectUserCoins)
 
+  const [graphScale, setGraphScale] = useState(30)
+
   return (
     <Table className="text-white">
       <thead>
@@ -14,7 +17,11 @@ const WatchListTable = () => {
           <th></th>
           <th className="text-center">Price</th>
           <th className="text-center">24h</th>
-          <th className="text-center">7d</th>
+          <th
+            className="text-center"
+            onClick={() => setGraphScale(graphScale === 7 ? 30 : 7)}>
+            {graphScale}d
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +38,7 @@ const WatchListTable = () => {
               priceChange24hPercentage={
                 coin.price_change_percentage_24h?.toFixed() as string
               }
+              graphScale={graphScale}
             />
           )
         })}

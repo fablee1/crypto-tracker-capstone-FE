@@ -12,14 +12,14 @@ export const TopNav = styled.div`
 
 export const AddDataBtn = styled(Button)`
   border-radius: 5px;
-  color: #242424;
-  background-color: #33d10c;
+  color: white;
+  background-color: rgb(56, 97, 251);
   font-weight: 500;
   font-size: 18px;
   line-height: 1;
   border: none;
   &:hover {
-    background-color: #0ac50a;
+    background-color: rgb(66, 113, 252);
   }
 `
 
@@ -58,4 +58,18 @@ export const SearchBtn = styled(Button)`
     background: none;
     box-shadow: none;
   }
+`
+
+export const Heading = styled.h2`
+  color: white;
+`
+
+interface StatBlockTextProps {
+  value?: boolean
+}
+
+export const StatBlockText = styled.span<StatBlockTextProps>`
+  color: ${(props) => (props.value ? "rgb(97, 136, 255)" : "rgb(161, 167, 187)")};
+  margin: 0;
+  font-weight: 600;
 `

@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js"
 import SmallPriceGraph from "./SmallPriceGraph"
 
 interface WatchListTableRowProps {
@@ -8,6 +7,7 @@ interface WatchListTableRowProps {
   history: { timestamp: number; price: number; _id: string }[]
   priceChange24h: number
   priceChange24hPercentage: string
+  graphScale: number
 }
 
 const PortfolioTableRow = ({
@@ -17,6 +17,7 @@ const PortfolioTableRow = ({
   history,
   priceChange24h,
   priceChange24hPercentage,
+  graphScale,
 }: WatchListTableRowProps) => {
   return (
     <tr>
@@ -38,7 +39,7 @@ const PortfolioTableRow = ({
         )
       </td>
       <td style={{ maxWidth: "150px" }}>
-        <SmallPriceGraph history={history.slice(-7)} />
+        <SmallPriceGraph history={history.slice(-graphScale)} />
       </td>
     </tr>
   )
