@@ -33,6 +33,14 @@ export const fetchUserData = createAsyncThunk("user/fetchUserData", async () => 
   return { user: user.data, coins: coins.data }
 })
 
+export const toggleFavourite = createAsyncThunk(
+  "user/toggleFavourite",
+  async (coinId: string) => {
+    const { data } = await backend.post(`/crypto/favourites/${coinId}`)
+    return { data, coinId }
+  }
+)
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -53,6 +61,16 @@ export const userSlice = createSlice({
       const coins: any = {}
       action.payload.coins.forEach((coin) => (coins[coin.id] = coin))
       state.coins = { ...state.coins, ...coins }
+    })
+    builder.addCase(toggleFavourite.fulfilled, (state, action) => {
+      if (action.payload.data === "OK") {
+        state.me.favourites = state.me.favourites.filter(
+          (id) => id !== action.payload.coinId
+        )
+      } else {
+        state.coins[action.payload.coinId] = action.payload.data
+        state.me.favourites.push(action.payload.coinId)
+      }
     })
   },
 })
