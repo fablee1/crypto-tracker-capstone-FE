@@ -20,7 +20,7 @@ const WatchListTable = () => {
           <th
             className="text-center"
             onClick={() => setGraphScale(graphScale === 7 ? 30 : 7)}>
-            {graphScale}d
+            {graphScale}
           </th>
         </tr>
       </thead>

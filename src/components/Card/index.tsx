@@ -1,8 +1,16 @@
 import { CardHeader, CardWrapper } from "./styled"
 
-const Card = ({ children, title }: { children: JSX.Element; title: string }) => {
+const Card = ({
+  children,
+  title,
+  height,
+}: {
+  children: JSX.Element
+  title: string
+  height?: string
+}) => {
   return (
-    <CardWrapper>
+    <CardWrapper height={height}>
       <CardHeader>{title}</CardHeader>
       {children}
     </CardWrapper>

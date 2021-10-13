@@ -13,22 +13,22 @@ const DashBoard = () => {
       <DashBoardTopBar />
       <Row className="gx-3 gy-3" style={{ height: "79%" }}>
         <Col xs={12} sm={6}>
-          <Card title="Holdings">
+          <Card title="Holdings" height="350px">
             <PortfolioTable />
           </Card>
         </Col>
         <Col xs={12} sm={6}>
-          <Card title="Profit / Loss">
+          <Card title="Profit / Loss" height="350px">
             <></>
           </Card>
         </Col>
         <Col xs={12} sm={6}>
-          <Card title="Watchlist">
+          <Card title="Watchlist" height="350px">
             <WatchListTable />
           </Card>
         </Col>
         <Col xs={12} sm={6}>
-          <Card title="Portfolio value over time">
+          <Card title="Portfolio value over time" height="350px">
             <></>
           </Card>
         </Col>

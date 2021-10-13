@@ -39,7 +39,7 @@ const PortfolioTableRow = ({
         )
       </td>
       <td style={{ maxWidth: "150px" }}>
-        <SmallPriceGraph history={history.slice(-graphScale)} />
+        <SmallPriceGraph history={history?.slice(-graphScale)} />
       </td>
     </tr>
   )
