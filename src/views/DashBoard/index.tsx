@@ -2,7 +2,7 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "../../components/Card"
 import DashBoardTopBar from "../../components/DashBoardTopBar"
-import DashBoardTopNav from "../../components/DashBoardTopNav"
+import TopNav from "../../components/TopNav"
 import PortfolioTable from "../../components/PortfolioTable"
 import WatchListTable from "../../components/WatchListTable"
 import TotalValueChart from "../../components/Charts/TotalValueChart"
@@ -23,7 +23,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <DashBoardTopNav />
+      <TopNav title="Your Dashboard" />
       <DashBoardTopBar />
       <Row className="gx-3 gy-3" style={{ height: "79%" }}>
         <Col xs={12} sm={6}>

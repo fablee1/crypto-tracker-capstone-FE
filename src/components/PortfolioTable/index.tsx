@@ -25,6 +25,7 @@ const PortfolioTable = () => {
 
           return (
             <PortfolioTableRow
+              id={coin.id}
               image={coin.image}
               symbol={coin.symbol}
               amount={c.amount}

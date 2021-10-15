@@ -1,4 +1,4 @@
-import { AddDataBtn, Heading, StatBlockText, TopNav } from "./styled"
+import { AddDataBtn, Heading, StatBlockText, TopNavBox } from "./styled"
 import { AiFillPlusCircle } from "react-icons/ai"
 import { useState, useEffect } from "react"
 import AddDataModal from "../AddDataModal"
@@ -7,7 +7,12 @@ import { AxiosResponse } from "axios"
 import { IMarketData } from "../../typings/market"
 import backend from "../../backend"
 
-const DashBoardTopNav = () => {
+interface TopNavProps {
+  title: string
+  addDataBtn?: boolean
+}
+
+const TopNav = ({ title, addDataBtn = true }: TopNavProps) => {
   const [show, setShow] = useState(false)
 
   const [marketData, setMarketData] = useState({
@@ -28,8 +33,8 @@ const DashBoardTopNav = () => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   return (
-    <TopNav>
-      <Heading>Your Dashboard</Heading>
+    <TopNavBox>
+      <Heading>{title}</Heading>
 
       <div className="mx-auto d-flex">
         <StatBlock title="Cryptos: " value={`${marketData.cryptos.toLocaleString()}`} />
@@ -48,17 +53,20 @@ const DashBoardTopNav = () => {
       </div>
 
       <Search />
-
-      <AddDataBtn className="d-flex align-items-center" onClick={handleShow}>
-        <AiFillPlusCircle size="1.2em" className="me-1" />
-        <div>Add your data</div>
-      </AddDataBtn>
-      <AddDataModal show={show} close={handleClose} />
-    </TopNav>
+      {addDataBtn === true && (
+        <>
+          <AddDataBtn className="d-flex align-items-center" onClick={handleShow}>
+            <AiFillPlusCircle size="1.2em" className="me-1" />
+            <div>Add your data</div>
+          </AddDataBtn>
+          <AddDataModal show={show} close={handleClose} />
+        </>
+      )}
+    </TopNavBox>
   )
 }
 
-export default DashBoardTopNav
+export default TopNav
 
 interface StatBlockProps {
   title: string

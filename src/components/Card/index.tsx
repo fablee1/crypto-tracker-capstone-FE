@@ -5,13 +5,13 @@ const Card = ({
   title,
   height,
 }: {
-  children: JSX.Element
-  title: string
+  children: any
+  title?: string
   height?: string
 }) => {
   return (
     <CardWrapper height={height}>
-      <CardHeader>{title}</CardHeader>
+      {title && <CardHeader>{title}</CardHeader>}
       {children}
     </CardWrapper>
   )

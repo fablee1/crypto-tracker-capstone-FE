@@ -7,6 +7,7 @@ import AllCoins from "../AllCoins"
 import { io } from "socket.io-client"
 import { ContentWrapper, MainWrapper } from "./styled"
 import { Route, Switch } from "react-router"
+import CoinPage from "../CoinPage"
 
 export const socket = io(process.env.REACT_APP_BE_URL_DEV!, { transports: ["websocket"] })
 
@@ -28,6 +29,7 @@ const Main = () => {
         <Switch>
           <Route exact path="/" component={DashBoard} />
           <Route exact path="/cryptos" component={AllCoins} />
+          <Route path="/coins/:id" component={CoinPage} />
         </Switch>
       </ContentWrapper>
     </MainWrapper>

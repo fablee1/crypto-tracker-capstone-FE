@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button"
 import InputGroup from "react-bootstrap/InputGroup"
 import FormControl from "react-bootstrap/FormControl"
 
-export const TopNav = styled.div`
+export const TopNavBox = styled.div`
   height: 65px;
   margin-bottom: 16px;
   display: flex;
