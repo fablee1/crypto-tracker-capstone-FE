@@ -4,9 +4,10 @@ import { selectUserFavourites, toggleFavourite } from "../../redux/slices/userSl
 
 interface FavouriteButtonProps {
   coinId: string
+  size?: string
 }
 
-const FavouriteButton = ({ coinId }: FavouriteButtonProps) => {
+const FavouriteButton = ({ coinId, size }: FavouriteButtonProps) => {
   const userFavourites = useAppSelector(selectUserFavourites)
   const dispatch = useAppDispatch()
 
@@ -16,7 +17,11 @@ const FavouriteButton = ({ coinId }: FavouriteButtonProps) => {
 
   return (
     <div onClick={handleClick}>
-      {userFavourites.includes(coinId) ? <AiFillStar /> : <AiOutlineStar />}
+      {userFavourites.includes(coinId) ? (
+        <AiFillStar size={size} />
+      ) : (
+        <AiOutlineStar size={size} />
+      )}
     </div>
   )
 }
