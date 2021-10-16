@@ -1,6 +1,9 @@
 import BigNumber from "bignumber.js"
+import { useHistory } from "react-router"
+import styled from "styled-components"
 
 interface PortfolioTableRowProps {
+  id: string
   image: string
   symbol: string
   amount: number
@@ -10,7 +13,15 @@ interface PortfolioTableRowProps {
   priceChange24hPercentage: string
 }
 
+const MyTr = styled.tr`
+  &:hover {
+    background-color: #8080801a;
+    cursor: pointer;
+  }
+`
+
 const PortfolioTableRow = ({
+  id,
   image,
   symbol,
   amount,
@@ -24,8 +35,11 @@ const PortfolioTableRow = ({
     .dividedBy(avgBuyPrice)
     .multipliedBy(100)
     .toFixed(0)
+
+  const history = useHistory()
+
   return (
-    <tr>
+    <MyTr onClick={() => history.push(`/coins/${id}`)}>
       <td>
         <img src={image} width="24px" alt="" className="me-2" />
         {symbol.toUpperCase()}
@@ -49,7 +63,7 @@ const PortfolioTableRow = ({
         className={`text-end ${
           parseFloat(roi) < 0 ? "text-danger" : "text-success"
         }`}>{`${roi}%`}</td>
-    </tr>
+    </MyTr>
   )
 }
 

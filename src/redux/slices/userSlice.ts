@@ -47,8 +47,6 @@ export const userSlice = createSlice({
   reducers: {
     updatePrices: (state, action) => {
       action.payload.forEach((update: { coin: string; price: number }) => {
-        console.log(update)
-        console.log(state.coins[update.coin])
         state.coins[update.coin].current_price = update.price
         state.coins[update.coin].last1hPrice?.shift()
         state.coins[update.coin].last1hPrice?.push(update.price)

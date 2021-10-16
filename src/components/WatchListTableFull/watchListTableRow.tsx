@@ -8,19 +8,28 @@ interface WatchListTableRowProps {
   priceChange24h: number
   priceChange24hPercentage: string
   graphScale: number
+  marketCapRank: number
+  marketCap: number
+  volume: number
+  circulatingSupply: number
 }
 
-const PortfolioTableRow = ({
+const WatchListTableRow = ({
   image,
+  marketCapRank,
+  marketCap,
   symbol,
   price,
   history,
   priceChange24h,
   priceChange24hPercentage,
   graphScale,
+  volume,
+  circulatingSupply,
 }: WatchListTableRowProps) => {
   return (
     <tr>
+      <td>{`#${marketCapRank}`}</td>
       <td>
         <img src={image} width="24px" alt="" className="me-2" />
         {symbol.toUpperCase()}
@@ -38,6 +47,10 @@ const PortfolioTableRow = ({
         </span>
         )
       </td>
+      <td>No Data</td>
+      <td>{marketCap}</td>
+      <td>{volume}</td>
+      <td>{circulatingSupply}</td>
       <td style={{ maxWidth: "150px" }}>
         <SmallPriceChart history={history?.slice(-graphScale)} />
       </td>
@@ -45,4 +58,4 @@ const PortfolioTableRow = ({
   )
 }
 
-export default PortfolioTableRow
+export default WatchListTableRow

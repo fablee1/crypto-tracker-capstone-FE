@@ -1,4 +1,5 @@
 export interface ITransaction {
+  _id: string
   type: string
   coin: string
   from?: string

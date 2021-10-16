@@ -4,14 +4,16 @@ const Card = ({
   children,
   title,
   height,
+  className,
 }: {
-  children: JSX.Element
-  title: string
+  children: any
+  title?: string
   height?: string
+  className?: string
 }) => {
   return (
-    <CardWrapper height={height}>
-      <CardHeader>{title}</CardHeader>
+    <CardWrapper height={height} className={className}>
+      {title && <CardHeader>{title}</CardHeader>}
       {children}
     </CardWrapper>
   )

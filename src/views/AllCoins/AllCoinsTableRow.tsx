@@ -1,6 +1,6 @@
 import { IAllCoinsData } from "."
 import FavouriteButton from "../../components/FavouriteButton"
-import SmallPriceGraph from "../../components/WatchListTable/SmallPriceGraph"
+import SmallPriceGraph from "../../components/SmallPriceChart"
 
 interface AllCoinsTableRowProps {
   data: IAllCoinsData

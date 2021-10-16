@@ -231,3 +231,27 @@ div#root {
 .data-add-modal {
   max-width: 800px !important;
 }
+
+/* progress bars */
+
+.min-max-price,
+.min-max-price-bar {
+  display: flex;
+  overflow: hidden;
+}
+
+.min-max-price-bar {
+  background-color: #646b80;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  transition: width 0.6s ease;
+}
+
+.min-max-price {
+  background-color: #323546;
+  border-radius: 0.25rem;
+  height: 0.5rem;
+  width: 100%;
+}
