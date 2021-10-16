@@ -21,7 +21,9 @@ const NavBar = () => {
           <IoMdAlarm size="2.2em" />
         </MyNav.Link>
         <MyNav.Link>
-          <AiFillStar size="2.2em" />
+          <Link to="/watchlist">
+            <AiFillStar size="2.2em" />
+          </Link>
         </MyNav.Link>
         <MyNav.Link>Stats</MyNav.Link>
         <MyNav.Link>

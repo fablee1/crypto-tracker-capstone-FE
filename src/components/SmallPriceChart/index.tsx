@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts"
 
-interface SmallPriceGraphProps {
+interface SmallPriceChartProps {
   history: { timestamp: number; price: number; _id: string }[]
 }
 
-const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
+const SmallPriceChart = ({ history }: SmallPriceChartProps) => {
   const [data, setData] = useState<any>([])
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
   )
 }
 
-export default SmallPriceGraph
+export default SmallPriceChart
