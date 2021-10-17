@@ -25,7 +25,9 @@ const NavBar = () => {
             <AiFillStar size="2.2em" />
           </Link>
         </MyNav.Link>
-        <MyNav.Link>Stats</MyNav.Link>
+        <MyNav.Link>
+          <Link to="/news">News</Link>
+        </MyNav.Link>
         <MyNav.Link>
           <Link to="/cryptos">All Coins</Link>
         </MyNav.Link>
