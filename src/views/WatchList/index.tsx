@@ -60,7 +60,7 @@ const WatchList = () => {
               <InfoBlockText>
                 This is your watchlist, you can watch for any coin and track it's
                 performance here. Currently you are watching{" "}
-                <span className="text-success">{userFavourites.length}</span> coins.
+                <span className="text-success fs-4">{userFavourites.length}</span> coins.
               </InfoBlockText>
             </div>
           </Card>

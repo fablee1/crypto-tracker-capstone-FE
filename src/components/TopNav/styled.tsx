@@ -24,7 +24,7 @@ export const AddDataBtn = styled(Button)`
 `
 
 export const MySearch = styled(InputGroup)`
-  width: 200px;
+  width: 250px;
   box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 0.57);
 `
 
@@ -72,4 +72,16 @@ export const StatBlockText = styled.span<StatBlockTextProps>`
   color: ${(props) => (props.value ? "rgb(97, 136, 255)" : "rgb(161, 167, 187)")};
   margin: 0;
   font-weight: 600;
+`
+
+export const SearchResultsContainer = styled.div`
+  background-color: rgba(17, 21, 30, 1);
+  position: absolute;
+  top: 36px;
+  width: 100%;
+  min-height: 300px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 0.57);
+  z-index: 10;
 `

@@ -26,8 +26,9 @@ export const NewsHeaderBlockHeader = styled.div`
 `
 
 export const NewsCardsContainer = styled.div`
-  border: 1px solid white;
-  margin: 0 15px 15px 15px;
+  border: 1px solid #ffffff47;
+  margin: 0 30px 30px 30px;
+  padding: 25px;
   border-radius: 15px;
 `
 
