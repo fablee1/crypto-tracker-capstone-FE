@@ -10,6 +10,7 @@ export const CardWrapper = styled.div<{ height?: string }>`
   &::-webkit-scrollbar {
     display: none;
   }
+  position: relative;
 `
 
 export const CardHeader = styled.h2`

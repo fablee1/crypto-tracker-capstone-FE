@@ -5,7 +5,6 @@ import {
   selectUserPortfolio,
   selectUserTransactions,
 } from "../../redux/slices/userSlice"
-import { ICryptoCurrency } from "../../typings/crypto"
 import Card from "../Card"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -15,7 +14,7 @@ import {
   StatsBlockWrapper,
   StatsWrapper,
 } from "./styled"
-import { IPortfolio } from "../../typings/users"
+import NoCoinCover from "../../views/CoinPage/NoCoinCover"
 
 const UserCoinStats = ({ id }: { id: string }) => {
   const userPortfolio = useAppSelector(selectUserPortfolio)
@@ -72,57 +71,55 @@ const UserCoinStats = ({ id }: { id: string }) => {
   }, [id, userCoins, userPortfolio, userTransactions])
 
   return (
-    <>
-      {statsData ? (
-        <div className="mt-3">
-          <Card title="Your Stats">
-            <StatsWrapper>
-              <Row>
-                <Col xs={12} md={6}>
-                  <Row>
-                    <StatsInfoBlock
-                      title="Holding now"
-                      value={`${statsData.amount.toLocaleString()} ${statsData.symbol.toUpperCase()}`}
-                    />
-                    <StatsInfoBlock
-                      title="Coin Value"
-                      value={`$${statsData.coinValue.toLocaleString()}`}
-                    />
-                    <StatsInfoBlock
-                      title="Invested"
-                      value={`$${statsData.invested.toLocaleString()}`}
-                    />
-                    <StatsInfoBlock
-                      title="Average Buy Price"
-                      value={`$${statsData.averageBuyPrice.toLocaleString()}`}
-                    />
-                  </Row>
-                </Col>
-                <Col xs={12} md={6}>
-                  <Row>
-                    <StatsInfoBlock title="ROI" value={`${statsData.roi.toFixed(2)}%`} />
-                    <StatsInfoBlock
-                      title="Total Transactions"
-                      value={`${statsData.totalTransCount}`}
-                    />
-                    <StatsInfoBlock
-                      title="First Buy"
-                      value={`${new Date(statsData.firstTransDate).toLocaleDateString()}`}
-                    />
-                    <StatsInfoBlock
-                      title="Portfolio %"
-                      value={`${statsData.portfolioPercentage.toFixed(2)}%`}
-                    />
-                  </Row>
-                </Col>
-              </Row>
-            </StatsWrapper>
-          </Card>
-        </div>
-      ) : (
-        <div>YOU DONT HAVE THIS COIN IN YOUR PORTFOLIO</div>
-      )}
-    </>
+    <div className="mt-3">
+      <Card title="Your Stats" height="305px">
+        {statsData ? (
+          <StatsWrapper>
+            <Row>
+              <Col xs={12} md={6}>
+                <Row>
+                  <StatsInfoBlock
+                    title="Holding now"
+                    value={`${statsData.amount.toLocaleString()} ${statsData.symbol.toUpperCase()}`}
+                  />
+                  <StatsInfoBlock
+                    title="Coin Value"
+                    value={`$${statsData.coinValue.toLocaleString()}`}
+                  />
+                  <StatsInfoBlock
+                    title="Invested"
+                    value={`$${statsData.invested.toLocaleString()}`}
+                  />
+                  <StatsInfoBlock
+                    title="Average Buy Price"
+                    value={`$${statsData.averageBuyPrice.toLocaleString()}`}
+                  />
+                </Row>
+              </Col>
+              <Col xs={12} md={6}>
+                <Row>
+                  <StatsInfoBlock title="ROI" value={`${statsData.roi.toFixed(2)}%`} />
+                  <StatsInfoBlock
+                    title="Total Transactions"
+                    value={`${statsData.totalTransCount}`}
+                  />
+                  <StatsInfoBlock
+                    title="First Buy"
+                    value={`${new Date(statsData.firstTransDate).toLocaleDateString()}`}
+                  />
+                  <StatsInfoBlock
+                    title="Portfolio %"
+                    value={`${statsData.portfolioPercentage.toFixed(2)}%`}
+                  />
+                </Row>
+              </Col>
+            </Row>
+          </StatsWrapper>
+        ) : (
+          <NoCoinCover />
+        )}
+      </Card>
+    </div>
   )
 }
 

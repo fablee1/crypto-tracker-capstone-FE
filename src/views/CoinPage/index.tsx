@@ -7,20 +7,31 @@ import backend from "../../backend"
 import TopNav from "../../components/TopNav"
 import CoinPriceChart from "../../components/Charts/CoinPriceChart"
 import SimpleLoader from "../../components/Loaders/SimpleLoader"
-import { CoinPageContentWrapper } from "./styled"
+import { CoinPageContentWrapper, NoCoinCoverDiv } from "./styled"
 import CoinGeneralInfo from "../../components/CoinGeneralInfo"
 import UserCoinStats from "../../components/UserCoinStats"
 import UserCoinTransactions from "../../components/UserCoinTransactions"
 import UserCoinTransactionsDetails from "../../components/UserCoinTransactionsDetails"
+import { useAppSelector } from "../../redux/hooks"
+import { selectUserPortfolio } from "../../redux/slices/userSlice"
 
 const CoinPage = () => {
   const { id }: { id: string } = useParams()
+  const userPortfolio = useAppSelector(selectUserPortfolio)
 
   const [selectedTrans, setSelectedTrans] = useState<string | null>(null)
+
+  const [coinInPortfolio, setCoinInPortfolio] = useState(false)
 
   const [coinHistory, setCoinHistory] = useState<
     { timestamp: number; price: number }[] | null
   >(null)
+
+  useEffect(() => {
+    setCoinInPortfolio(
+      userPortfolio.findIndex((p) => p.coinId === id) === -1 ? false : true
+    )
+  }, [id, userPortfolio])
 
   useEffect(() => {
     const getCoinHistory = async () => {
@@ -49,10 +60,17 @@ const CoinPage = () => {
         <UserCoinStats id={id} />
         <Row>
           <Col xs={12} sm={6}>
-            <UserCoinTransactions coinId={id} selectTrans={setSelectedTrans} />
+            <UserCoinTransactions
+              coinId={id}
+              selectTrans={setSelectedTrans}
+              coinInPortfolio={coinInPortfolio}
+            />
           </Col>
           <Col xs={12} sm={6}>
-            <UserCoinTransactionsDetails transId={selectedTrans} />
+            <UserCoinTransactionsDetails
+              transId={selectedTrans}
+              coinInPortfolio={coinInPortfolio}
+            />
           </Col>
         </Row>
       </CoinPageContentWrapper>
