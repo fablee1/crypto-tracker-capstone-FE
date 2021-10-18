@@ -6,7 +6,7 @@ export const CardWrapper = styled.div<{ height?: string }>`
   height: 100%;
   border-radius: 5px;
   height: ${(props) => props.height && props.height};
-  overflow: auto;
+  overflow: ${(props) => props.height && "auto"};
   &::-webkit-scrollbar {
     display: none;
   }

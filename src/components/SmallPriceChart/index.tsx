@@ -15,7 +15,7 @@ const SmallPriceChart = ({ history }: SmallPriceChartProps) => {
     setData(newData)
   }, [history])
   return (
-    <ResponsiveContainer width={"99%"} height={50}>
+    <ResponsiveContainer width={"99%"} height={45}>
       <LineChart
         data={data}
         margin={{

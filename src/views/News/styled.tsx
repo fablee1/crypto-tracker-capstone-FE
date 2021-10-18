@@ -10,8 +10,11 @@ export const TickerWidgetWrapper = styled.div`
   transition: all 0.8s;
   display: flex;
   overflow: hidden;
+  z-index: 2;
   flex-direction: column;
   width: 100%;
+  position: sticky;
+  top: 0;
 `
 
 export const NewsHeaderBlock = styled.div`

@@ -1,18 +1,18 @@
-import { MyNav, NavWrapper } from "./styled"
+import { MyNav, NavWrapper, StyledLink } from "./styled"
 import { AiFillHome, AiFillStar } from "react-icons/ai"
 import { HiChartSquareBar } from "react-icons/hi"
 import { IoMdAlarm } from "react-icons/io"
-import { FaUserCircle } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { RiNewspaperFill } from "react-icons/ri"
+import { FaUserCircle, FaListAlt } from "react-icons/fa"
 
 const NavBar = () => {
   return (
     <NavWrapper>
       <MyNav defaultActiveKey="/home" className="flex-column">
         <MyNav.Link>
-          <Link to="/">
+          <StyledLink to="/">
             <AiFillHome size="2.2em" />
-          </Link>
+          </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
           <HiChartSquareBar size="2.2em" />
@@ -21,15 +21,19 @@ const NavBar = () => {
           <IoMdAlarm size="2.2em" />
         </MyNav.Link>
         <MyNav.Link>
-          <Link to="/watchlist">
+          <StyledLink to="/watchlist">
             <AiFillStar size="2.2em" />
-          </Link>
+          </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
-          <Link to="/news">News</Link>
+          <StyledLink to="/news">
+            <RiNewspaperFill size="2.1em" />
+          </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
-          <Link to="/cryptos">All Coins</Link>
+          <StyledLink to="/cryptos">
+            <FaListAlt size="2em" />
+          </StyledLink>
         </MyNav.Link>
 
         <MyNav.Link className="mt-auto mb-4">

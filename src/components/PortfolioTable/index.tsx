@@ -1,7 +1,8 @@
 import Table from "react-bootstrap/Table"
 import { useAppSelector } from "../../redux/hooks"
 import { selectUserCoins, selectUserPortfolio } from "../../redux/slices/userSlice"
-import PortfolioTableRow from "./portfolioTableRow"
+import TableCoinRow from "../TableCoinRow"
+import BigNumber from "bignumber.js"
 
 const PortfolioTable = () => {
   const userPortfolio = useAppSelector(selectUserPortfolio)
@@ -23,18 +24,28 @@ const PortfolioTable = () => {
         {userPortfolio.map((c) => {
           const coin = userCoins[c.coinId]
 
+          const roi = new BigNumber(coin.current_price)
+            .minus(c.averageBuyPrice)
+            .dividedBy(c.averageBuyPrice)
+            .multipliedBy(100)
+            .toNumber()
+
+          const value = new BigNumber(coin.current_price)
+            .multipliedBy(c.amount)
+            .toNumber()
+
           return (
-            <PortfolioTableRow
+            <TableCoinRow
               id={coin.id}
-              image={coin.image}
+              img={coin.image}
+              name={coin.name}
+              value={value}
               symbol={coin.symbol}
               amount={c.amount}
               price={coin.current_price}
-              avgBuyPrice={c.averageBuyPrice}
-              priceChange24h={coin.price_change_24h as number}
-              priceChange24hPercentage={
-                coin.price_change_percentage_24h?.toFixed() as string
-              }
+              roi={roi}
+              price_change_24h={coin.price_change_24h as number}
+              price_change_24h_perc={coin.price_change_percentage_24h as number}
             />
           )
         })}

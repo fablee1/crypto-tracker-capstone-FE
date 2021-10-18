@@ -2,7 +2,7 @@ import { useState } from "react"
 import Table from "react-bootstrap/Table"
 import { useAppSelector } from "../../redux/hooks"
 import { selectUserCoins, selectUserFavourites } from "../../redux/slices/userSlice"
-import WatchListTableRow from "./watchListTableRow"
+import TableCoinRow from "../TableCoinRow"
 
 const WatchListTableFull = () => {
   const userFavourites = useAppSelector(selectUserFavourites)
@@ -11,7 +11,7 @@ const WatchListTableFull = () => {
   const [graphScale, setGraphScale] = useState(30)
 
   return (
-    <Table className="text-white">
+    <Table className="text-white position-relative">
       <thead>
         <tr>
           <th>Rank</th>
@@ -31,20 +31,21 @@ const WatchListTableFull = () => {
           const coin = userCoins[coinId]
 
           return (
-            <WatchListTableRow
-              marketCapRank={coin.market_cap_rank}
-              image={coin.image}
+            <TableCoinRow
+              id={coin.id}
+              market_cap_rank={coin.market_cap_rank}
+              img={coin.image}
+              name={coin.name}
               symbol={coin.symbol}
               price={coin.current_price}
-              history={coin.historical1D}
-              priceChange24h={coin.price_change_24h as number}
-              priceChange24hPercentage={
-                coin.price_change_percentage_24h?.toFixed() as string
-              }
+              historical1D={coin.historical1D}
+              price_change_24h={coin.price_change_24h as number}
+              price_change_24h_perc={coin.price_change_percentage_24h as number}
               graphScale={graphScale}
-              marketCap={coin.market_cap}
+              sevenDayChange={0.1}
+              market_cap={coin.market_cap}
               volume={coin.total_volume as number}
-              circulatingSupply={coin.circulating_supply as number}
+              circ_supply={coin.circulating_supply as number}
             />
           )
         })}
