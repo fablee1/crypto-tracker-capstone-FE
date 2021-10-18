@@ -255,3 +255,9 @@ div#root {
   height: 0.5rem;
   width: 100%;
 }
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: rgba(17, 21, 30, 1);
+}

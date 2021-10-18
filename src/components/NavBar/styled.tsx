@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Nav from "react-bootstrap/Nav"
 import LinkBs from "react-bootstrap/NavLink"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 export const NavWrapper = styled.div`
   background-color: rgba(9, 13, 24, 1);
@@ -11,7 +11,7 @@ export const NavWrapper = styled.div`
   position: fixed;
 `
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
   color: gray;
   &:hover {
     color: white;
@@ -27,7 +27,7 @@ export const MyNav = styled(Nav)`
 
 const MyNavLink = styled(LinkBs)`
   padding: 0;
-  margin-top: 35px;
+  margin-top: 45px;
   color: gray;
   display: flex;
   justify-content: center;

@@ -14,5 +14,5 @@ export const CardWrapper = styled.div<{ height?: string }>`
 
 export const CardHeader = styled.h2`
   color: rgba(143, 143, 149, 1);
-  font-size: 18px;
+  font-size: 19px;
 `

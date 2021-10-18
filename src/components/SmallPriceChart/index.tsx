@@ -28,7 +28,10 @@ const SmallPriceChart = ({ history }: SmallPriceChartProps) => {
         <YAxis domain={["auto", "auto"]} hide={true} />
         <Line
           dataKey="price"
-          stroke={data[0]?.price < data.at(-1)?.price ? "green" : "red"}
+          stroke={
+            data[0]?.price < data.at(-1)?.price ? "rgb(79 194 128)" : "rgb(214 69 93)"
+          }
+          strokeWidth={2}
           dot={false}
         />
       </LineChart>

@@ -12,8 +12,13 @@ export const CoinRowTd = styled.td`
   vertical-align: middle;
 `
 
-export const CoinRowTdDiv = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
+export const CoinRowName = styled.span`
+  font-size: 16px;
+  text-decoration: none !important;
+  color: white;
+  vertical-align: middle;
+`
+
+export const CoinValuePercentage = styled.span<{ value: number }>`
+  color: ${(props) => (props.value < 0 ? "rgb(234, 57, 67)" : "rgb(22, 199, 132)")};
 `

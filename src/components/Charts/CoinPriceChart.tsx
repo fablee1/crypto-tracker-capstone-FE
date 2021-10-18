@@ -42,7 +42,7 @@ const CoinPriceChart = ({ data }: TotalValueChartProps) => {
         }}>
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="date" />
-        <YAxis />
+        <YAxis domain={["auto", "dataMax"]} />
         <Tooltip />
         <Area type="monotone" dataKey="value" stroke="#084288" fill="#084288" />
       </AreaChart>
