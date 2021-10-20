@@ -2,7 +2,6 @@ import FavouriteButton from "../FavouriteButton"
 import SmallPriceGraph from "../../components/SmallPriceChart"
 import { CoinRowName, CoinRowTd, CoinRowTr, CoinValuePercentage } from "./styled"
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
 
 const getSevenDayData = (price7dAgo: number, curr_price: number) => {
   const price_change = curr_price - price7dAgo
@@ -146,8 +145,8 @@ const ColoredValueWithPercentage = ({
         ? `${value < 0 ? "" : "+"}${value.toFixed()}%`
         : `$${
             value < 0
-              ? parseFloat(value.toPrecision(1)).toLocaleString().slice(1)
-              : parseFloat(value.toPrecision(1)).toLocaleString()
+              ? parseFloat(value.toFixed(2)).toLocaleString().slice(1)
+              : parseFloat(value.toFixed(2)).toLocaleString()
           }`}
     </CoinValuePercentage>
   )

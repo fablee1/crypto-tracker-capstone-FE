@@ -9,6 +9,7 @@ import { CardWrapper } from "../Card/styled"
 import { Divider, TopBar } from "./styled"
 import TopBarInfoBlock from "./TopBarInfoBlock"
 import BigNumber from "bignumber.js"
+import { CoinValuePercentage } from "./styled"
 
 const DashBoardTopBar = () => {
   const userPortfolio = useAppSelector(selectUserPortfolio)
@@ -56,6 +57,7 @@ const DashBoardTopBar = () => {
         sevenDayGain: 0,
       }
     )
+    console.log(gains)
 
     const invested = userTransactions.reduce((prev, curr) => {
       if (curr.type === "buy" && curr.for?.toLowerCase() === "usd" && curr.total) {
@@ -102,39 +104,58 @@ const DashBoardTopBar = () => {
   return (
     <TopBar>
       <CardWrapper className="d-flex align-items-center">
-        <TopBarInfoBlock header="Net Worth" text={`$${data.netWorth}`} />
+        <TopBarInfoBlock header="Net Worth">{`$${Math.round(
+          data.netWorth
+        ).toLocaleString()}`}</TopBarInfoBlock>
         <Divider />
-        <TopBarInfoBlock header="Value Of Coins" text={`$${data.netWorth}`} />
-        <TopBarInfoBlock
-          header="Day's Gain"
-          text={`${data.dayGainPercent.toFixed(0)}% ($${data.dayGain.toFixed(0)})`}
-          secondaryBlock
-        />
-        <TopBarInfoBlock
-          header="7d"
-          text={`${data.sevenDayGainPercent.toFixed(0)}% ($${data.sevenDayGain.toFixed(
-            0
-          )})`}
-          secondaryBlock
-        />
+        <TopBarInfoBlock header="Value Of Coins">{`$${Math.round(
+          data.netWorth
+        ).toLocaleString()}`}</TopBarInfoBlock>
+        <TopBarInfoBlock header="Day's Gain" secondaryBlock>
+          <ColoredValueWithPercentage value={data.dayGainPercent} isPercentage /> (
+          <ColoredValueWithPercentage value={data.dayGain} />)
+        </TopBarInfoBlock>
+        <TopBarInfoBlock header="7d" secondaryBlock>
+          <ColoredValueWithPercentage value={data.sevenDayGainPercent} isPercentage /> (
+          <ColoredValueWithPercentage value={data.sevenDayGain} />)
+        </TopBarInfoBlock>
         <Divider />
-        <TopBarInfoBlock
-          header="Invested Fiat"
-          text={`$${data.investedCash.toFixed(0)}`}
-        />
-        <TopBarInfoBlock
-          header="Return on Investment"
-          text={`${data.roiPercent.toFixed(0)}% ($${data.roi.toFixed(0)})`}
-          secondaryBlock
-        />
+        <TopBarInfoBlock header="Invested Fiat">
+          {`$${data.investedCash.toFixed(0)}`}
+        </TopBarInfoBlock>
+        <TopBarInfoBlock header="Return on Investment" secondaryBlock>
+          <ColoredValueWithPercentage value={data.roiPercent} isPercentage /> (
+          <ColoredValueWithPercentage value={data.roi} />)
+        </TopBarInfoBlock>
         <Divider />
-        <TopBarInfoBlock
-          header="Investable Cash"
-          text={`$${data.investableCash.toFixed(0)}`}
-        />
+        <TopBarInfoBlock header="Investable Cash">
+          {`$${data.investableCash.toFixed(0)}`}
+        </TopBarInfoBlock>
       </CardWrapper>
     </TopBar>
   )
 }
 
 export default DashBoardTopBar
+
+interface ColoredValueWithPercentageProps {
+  value: number
+  isPercentage?: boolean
+}
+
+const ColoredValueWithPercentage = ({
+  value,
+  isPercentage,
+}: ColoredValueWithPercentageProps) => {
+  return (
+    <CoinValuePercentage value={value}>
+      {isPercentage
+        ? `${value < 0 ? "" : "+"}${value.toFixed()}%`
+        : `$${
+            value < 0
+              ? parseFloat(value.toFixed()).toLocaleString().slice(1)
+              : parseFloat(value.toFixed()).toLocaleString()
+          }`}
+    </CoinValuePercentage>
+  )
+}

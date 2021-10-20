@@ -9,8 +9,12 @@ import TotalValueChart from "../../components/Charts/TotalValueChart"
 import { useEffect, useState } from "react"
 import backend from "../../backend"
 import ProfitLossChart from "../../components/Charts/ProfitLossChart"
+import { useAppSelector } from "../../redux/hooks"
+import { selectUserTransactions } from "../../redux/slices/userSlice"
 
 const DashBoard = () => {
+  const userTransactions = useAppSelector(selectUserTransactions)
+
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {
@@ -19,7 +23,7 @@ const DashBoard = () => {
       setChartData(data)
     }
     getChartData()
-  }, [])
+  }, [userTransactions])
 
   return (
     <>

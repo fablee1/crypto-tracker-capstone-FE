@@ -10,7 +10,7 @@ const NavBar = () => {
     <NavWrapper>
       <MyNav defaultActiveKey="/home" className="flex-column">
         <MyNav.Link>
-          <StyledLink exact to="/" activeStyle={{ color: "white" }}>
+          <StyledLink exact to="/" activeStyle={{ color: "#3861fb" }}>
             <AiFillHome size="2.2em" />
           </StyledLink>
         </MyNav.Link>
@@ -21,17 +21,17 @@ const NavBar = () => {
           <IoMdAlarm size="2.2em" />
         </MyNav.Link>
         <MyNav.Link>
-          <StyledLink to="/watchlist" activeStyle={{ color: "white" }}>
+          <StyledLink to="/watchlist" activeStyle={{ color: "#3861fb" }}>
             <AiFillStar size="2.2em" />
           </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
-          <StyledLink to="/news" activeStyle={{ color: "white" }}>
+          <StyledLink to="/news" activeStyle={{ color: "#3861fb" }}>
             <RiNewspaperFill size="2.1em" />
           </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
-          <StyledLink to="/cryptos" activeStyle={{ color: "white" }}>
+          <StyledLink to="/cryptos" activeStyle={{ color: "#3861fb" }}>
             <FaListAlt size="1.8em" />
           </StyledLink>
         </MyNav.Link>

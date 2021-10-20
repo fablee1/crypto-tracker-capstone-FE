@@ -22,7 +22,7 @@ const Main = () => {
     socket.on("newPrices", (prices) => {
       dispatch(updatePrices(prices))
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <MainWrapper>

@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
-import {
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Area,
-} from "recharts"
+import { AreaChart, XAxis, YAxis, ResponsiveContainer, Tooltip, Area } from "recharts"
+import { getDayMonthString } from "../../utils/dates"
 import { CardHeader } from "../Card/styled"
 import ChartBtns from "./ChartBtns"
 
@@ -18,7 +11,7 @@ interface ProfitLossChartProps {
 const ProfitLossChart = ({ data }: ProfitLossChartProps) => {
   const [chartData, setChartData] = useState<
     {
-      date: string
+      date: number
       invested: number
       value: number
     }[]
@@ -26,7 +19,7 @@ const ProfitLossChart = ({ data }: ProfitLossChartProps) => {
 
   const [scaledChartData, setScaledChartData] = useState<
     {
-      date: string
+      date: number
       invested: number
       value: number
     }[]
@@ -37,7 +30,7 @@ const ProfitLossChart = ({ data }: ProfitLossChartProps) => {
   useEffect(() => {
     const formattedData = data.map((d) => {
       return {
-        date: new Date(d.timestamp).toLocaleString(),
+        date: d.timestamp,
         invested: d.invested,
         value: d.portfolioValue,
       }
@@ -70,24 +63,32 @@ const ProfitLossChart = ({ data }: ProfitLossChartProps) => {
             left: 0,
             bottom: 0,
           }}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#55555c" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#55555c" stopOpacity={0.4} />
+            </linearGradient>
+            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#17d430" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#17d430" stopOpacity={0.4} />
+            </linearGradient>
+          </defs>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis dataKey="date" />
-          <YAxis domain={[0, "dataMax"]} />
+          <XAxis
+            dataKey="date"
+            tickFormatter={getDayMonthString}
+            minTickGap={65}
+            tickMargin={5}
+            tick={{ fontSize: "14px" }}
+          />
+          <YAxis
+            domain={[0, "auto"]}
+            tick={{ fontSize: "14px" }}
+            tickFormatter={(tick: number) => (tick > 999 ? `${tick / 1000}k` : `${tick}`)}
+          />
           <Tooltip />
-          <Area
-            type="monotone"
-            stackId="1"
-            dataKey="invested"
-            stroke="#544f5c"
-            fill="#544f5c"
-          />
-          <Area
-            type="monotone"
-            stackId="1"
-            dataKey="value"
-            stroke="#17d430"
-            fill="#17d430"
-          />
+          <Area stackId={1} dataKey="invested" stroke="#544f5c" fill="url(#colorUv)" />
+          <Area stackId={1} dataKey="value" stroke="#17d430" fill="url(#colorPv)" />
         </AreaChart>
       </ResponsiveContainer>
     </>

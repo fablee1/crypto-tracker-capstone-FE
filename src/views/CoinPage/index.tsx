@@ -7,7 +7,7 @@ import backend from "../../backend"
 import TopNav from "../../components/TopNav"
 import CoinPriceChart from "../../components/Charts/CoinPriceChart"
 import SimpleLoader from "../../components/Loaders/SimpleLoader"
-import { CoinPageContentWrapper, NoCoinCoverDiv } from "./styled"
+import { CoinPageContentWrapper } from "./styled"
 import CoinGeneralInfo from "../../components/CoinGeneralInfo"
 import UserCoinStats from "../../components/UserCoinStats"
 import UserCoinTransactions from "../../components/UserCoinTransactions"
@@ -47,7 +47,7 @@ const CoinPage = () => {
         <TopNav title="Coin Page" addDataBtn={false} />
         <Row className="gx-3 gy-3" style={{ color: "white" }}>
           <Col xs={12} sm={6}>
-            <Card title="Price Chart" height="350px">
+            <Card height="350px">
               {coinHistory ? <CoinPriceChart data={coinHistory} /> : <SimpleLoader />}
             </Card>
           </Col>

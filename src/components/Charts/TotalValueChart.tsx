@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
-import {
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Area,
-} from "recharts"
+import { AreaChart, XAxis, YAxis, ResponsiveContainer, Tooltip, Area } from "recharts"
+import { getDayMonthString } from "../../utils/dates"
 import { CardHeader } from "../Card/styled"
 import ChartBtns from "./ChartBtns"
 
@@ -18,14 +11,14 @@ interface TotalValueChartProps {
 const TotalValueChart = ({ data }: TotalValueChartProps) => {
   const [chartData, setChartData] = useState<
     {
-      date: string
+      timestamp: number
       value: number
     }[]
   >([])
 
   const [scaledChartData, setScaledChartData] = useState<
     {
-      date: string
+      timestamp: number
       value: number
     }[]
   >([])
@@ -35,7 +28,7 @@ const TotalValueChart = ({ data }: TotalValueChartProps) => {
   useEffect(() => {
     const formattedData = data.map((d) => {
       return {
-        date: new Date(d.timestamp).toLocaleString(),
+        timestamp: d.timestamp,
         value: d.invested + d.portfolioValue,
       }
     })
@@ -66,11 +59,20 @@ const TotalValueChart = ({ data }: TotalValueChartProps) => {
             left: 0,
             bottom: 0,
           }}>
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis dataKey="date" />
-          <YAxis domain={["auto", "auto"]} />
+          <XAxis
+            dataKey="timestamp"
+            tickFormatter={getDayMonthString}
+            minTickGap={65}
+            tickMargin={5}
+            tick={{ fontSize: "14px" }}
+          />
+          <YAxis
+            domain={["auto", "auto"]}
+            tick={{ fontSize: "14px" }}
+            tickFormatter={(tick: number) => (tick > 999 ? `${tick / 1000}k` : `${tick}`)}
+          />
           <Tooltip />
-          <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
+          <Area dataKey="value" stroke="#8884d8" fill="#8884d8" />
         </AreaChart>
       </ResponsiveContainer>
     </>

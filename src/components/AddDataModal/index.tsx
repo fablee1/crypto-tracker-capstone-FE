@@ -4,6 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import { useState } from "react"
 import BuySellForm from "./BuySellForm"
 import TransferForm from "./TransferForm"
+import { MyModalBody } from "./styled"
 
 interface AddDataModalProps {
   show: boolean
@@ -15,11 +16,13 @@ const AddDataModal = ({ show, close }: AddDataModalProps) => {
 
   return (
     <Modal show={show} onHide={close} dialogClassName="data-add-modal">
-      <Modal.Header closeButton>
+      <Modal.Header
+        closeButton
+        style={{ backgroundColor: "rgb(17, 21, 30)", color: "white" }}>
         <Modal.Title>Add Your Data</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <ButtonGroup className="d-flex justify-content-center">
+      <MyModalBody>
+        <ButtonGroup className="d-flex justify-content-center mb-4">
           <Button variant="success" onClick={() => setType("buy")}>
             Buy
           </Button>
@@ -31,21 +34,13 @@ const AddDataModal = ({ show, close }: AddDataModalProps) => {
           </Button>
         </ButtonGroup>
         {type === "buy" ? (
-          <BuySellForm />
+          <BuySellForm close={close} />
         ) : type === "sell" ? (
-          <BuySellForm sell />
+          <BuySellForm sell close={close} />
         ) : (
           type === "transfer" && <TransferForm />
         )}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={close}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={close}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+      </MyModalBody>
     </Modal>
   )
 }

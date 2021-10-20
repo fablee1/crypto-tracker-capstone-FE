@@ -52,6 +52,14 @@ export const userSlice = createSlice({
         state.coins[update.coin].last1hPrice?.push(update.price)
       })
     },
+    addTransaction: (state, action) => {
+      console.log(action.payload.coinData)
+      if (action.payload.coinData !== null) {
+        state.coins[action.payload.coinData.id] = action.payload.coinData
+      }
+      state.me.transactions.push(action.payload.trans)
+      state.me.portfolio = action.payload.portfolio
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserData.fulfilled, (state, action) => {
@@ -79,6 +87,6 @@ export const selectUserPortfolio = (state: RootState) => state.user.me.portfolio
 export const selectUserFavourites = (state: RootState) => state.user.me.favourites
 export const selectUserTransactions = (state: RootState) => state.user.me.transactions
 
-export const { updatePrices } = userSlice.actions
+export const { updatePrices, addTransaction } = userSlice.actions
 
 export default userSlice.reducer

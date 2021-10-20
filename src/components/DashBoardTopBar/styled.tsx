@@ -39,5 +39,9 @@ export const TopBarBlockText = styled.p<TopBarProps>`
   font-weight: ${(props) => (props.secondaryBlock ? 500 : 700)};
   margin: 0;
   line-height: 1;
-  color: ${(props) => (props.secondaryBlock ? "rgb(119, 192, 96)" : "white")};
+  color: white;
+`
+
+export const CoinValuePercentage = styled.span<{ value: number }>`
+  color: ${(props) => (props.value < 0 ? "rgb(234, 57, 67)" : "rgb(22, 199, 132)")};
 `

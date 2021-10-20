@@ -230,6 +230,9 @@ div#root {
 
 .data-add-modal {
   max-width: 800px !important;
+  border: 2px solid rgba(255, 255, 255, 0.329);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 /* progress bars */
@@ -274,4 +277,9 @@ th {
 
 .svgAnimation {
   animation: 4s linear 0s infinite alternate pulsating;
+}
+
+.btn-close {
+  fill: white !important;
+  filter: brightness(0) invert(1);
 }
