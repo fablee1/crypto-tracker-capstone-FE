@@ -21,7 +21,7 @@ export const StatsBlock = styled.div`
 export const StatsBlockTitle = styled.div`
   color: rgba(143, 143, 149, 1);
   font-size: 1.25em;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `
 
 export const StatsBlockValue = styled.div`

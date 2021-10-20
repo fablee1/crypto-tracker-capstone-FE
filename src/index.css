@@ -6,8 +6,8 @@ body {
   height: 100%;
   background-color: rgba(30, 36, 52, 1) !important;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -230,6 +230,9 @@ div#root {
 
 .data-add-modal {
   max-width: 800px !important;
+  border: 2px solid rgba(255, 255, 255, 0.329);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 /* progress bars */
@@ -254,4 +257,41 @@ div#root {
   border-radius: 0.25rem;
   height: 0.5rem;
   width: 100%;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 150%;
+  background-color: #11151e;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  margin-top: -20px;
+}
+
+@keyframes pulsating {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+.svgAnimation {
+  animation: 4s linear 0s infinite alternate pulsating;
+}
+
+.btn-close {
+  fill: white !important;
+  filter: brightness(0) invert(1);
 }
