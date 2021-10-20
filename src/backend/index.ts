@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const backend = axios.create({
-  baseURL: process.env.REACT_APP_BE_URL_DEV,
+  baseURL: process.env.REACT_APP_BE_URL_PROD,
   withCredentials: true,
 })
 
