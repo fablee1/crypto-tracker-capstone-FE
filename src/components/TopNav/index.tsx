@@ -24,8 +24,12 @@ const TopNav = ({ title, addDataBtn = true }: TopNavProps) => {
 
   useEffect(() => {
     const getMarketData = async () => {
-      const { data }: AxiosResponse<IMarketData> = await backend.get("/crypto/market")
-      setMarketData(data)
+      try {
+        const { data }: AxiosResponse<IMarketData> = await backend.get("/crypto/market")
+        setMarketData(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
     getMarketData()
   }, [])

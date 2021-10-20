@@ -23,8 +23,12 @@ const Search = () => {
 
   useEffect(() => {
     const getCoins = async () => {
-      const { data }: AxiosResponse<Coins[]> = await backend.get("crypto/all")
-      setCoins(data)
+      try {
+        const { data }: AxiosResponse<Coins[]> = await backend.get("crypto/all")
+        setCoins(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
     getCoins()
   }, [])

@@ -19,6 +19,7 @@ export const CoinRowName = styled.span`
   vertical-align: middle;
 `
 
-export const CoinValuePercentage = styled.span<{ value: number }>`
+export const CoinValuePercentage = styled.span<{ value: number; size?: string }>`
   color: ${(props) => (props.value < 0 ? "rgb(234, 57, 67)" : "rgb(22, 199, 132)")};
+  font-size: ${(props) => props.size && props.size};
 `

@@ -19,8 +19,12 @@ const DashBoard = () => {
 
   useEffect(() => {
     const getChartData = async () => {
-      const { data } = await backend.get("/portfolio/value")
-      setChartData(data)
+      try {
+        const { data } = await backend.get("/portfolio/value")
+        setChartData(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
     getChartData()
   }, [userTransactions])

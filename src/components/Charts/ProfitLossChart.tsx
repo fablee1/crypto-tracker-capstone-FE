@@ -73,7 +73,6 @@ const ProfitLossChart = ({ data }: ProfitLossChartProps) => {
               <stop offset="95%" stopColor="#17d430" stopOpacity={0.4} />
             </linearGradient>
           </defs>
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis
             dataKey="date"
             tickFormatter={getDayMonthString}

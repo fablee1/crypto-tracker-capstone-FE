@@ -231,7 +231,7 @@ div#root {
 .data-add-modal {
   max-width: 800px !important;
   border: 2px solid rgba(255, 255, 255, 0.329);
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -262,7 +262,19 @@ div#root {
 th {
   position: sticky;
   top: 0;
-  background-color: rgba(17, 21, 30, 1);
+  z-index: 2;
+}
+
+th::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 150%;
+  background-color: #11151e;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  margin-top: -20px;
 }
 
 @keyframes pulsating {

@@ -16,6 +16,8 @@ import { selectUserCoins, selectUserFavourites } from "../../redux/slices/userSl
 import { useEffect, useState } from "react"
 import { ICryptoCurrency } from "../../typings/crypto"
 import SimpleLoader from "../../components/Loaders/SimpleLoader"
+import Badge from "react-bootstrap/Badge"
+import { ColoredValueWithPercentage } from "../../components/TableCoinRow"
 
 const WatchList = () => {
   const userFavourites = useAppSelector(selectUserFavourites)
@@ -85,10 +87,22 @@ const SingleHighlightCard = ({ title, coin }: SingleHighlightCardProps) => {
     <Col xs={6} sm={6} md={3}>
       <Card>
         <StatsBlock>
-          <StatsBlockTitle>{title}</StatsBlockTitle>
+          <StatsBlockTitle>
+            {title}
+            <Badge bg="secondary" className="ms-2">
+              24h
+            </Badge>
+          </StatsBlockTitle>
           <StatsBlockValue>
             {coin ? `${coin.name} (${coin.symbol.toUpperCase()})` : <SimpleLoader />}
           </StatsBlockValue>
+          {coin && (
+            <ColoredValueWithPercentage
+              value={coin.price_change_percentage_24h as number}
+              isPercentage
+              size="25px"
+            />
+          )}
         </StatsBlock>
       </Card>
     </Col>

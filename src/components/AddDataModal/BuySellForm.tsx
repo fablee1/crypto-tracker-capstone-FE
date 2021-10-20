@@ -148,6 +148,7 @@ const BuySellForm = ({ sell, close }: { sell?: boolean; close: any }) => {
 
   useEffect(() => {
     setTransaction({ ...transaction, type: sell ? "sell" : "buy" })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sell])
 
   const handleSubmit = async (e: FormEvent) => {

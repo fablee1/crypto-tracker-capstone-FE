@@ -19,10 +19,13 @@ const UserCoinRow = ({ data, select }: UserCoinRowProps) => {
       <td>{data.type.toUpperCase()}</td>
       <td className="text-end">{data.quantity?.toLocaleString()}</td>
       <td className="text-end">{data.fee?.toLocaleString()}</td>
-      <td className="text-end">{data.date}</td>
+      <td className="text-end">{new Date(data.date).toLocaleDateString()}</td>
       <td className="text-center">{data.time}</td>
       <td className="text-end">
-        <button>Details</button>
+        <button
+          style={{ backgroundColor: "transparent", color: "white", border: "none" }}>
+          Details
+        </button>
       </td>
     </MyTr>
   )

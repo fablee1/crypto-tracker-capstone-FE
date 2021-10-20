@@ -133,14 +133,16 @@ export default TableCoinRow
 interface ColoredValueWithPercentageProps {
   value: number
   isPercentage?: boolean
+  size?: string
 }
 
-const ColoredValueWithPercentage = ({
+export const ColoredValueWithPercentage = ({
   value,
   isPercentage,
+  size,
 }: ColoredValueWithPercentageProps) => {
   return (
-    <CoinValuePercentage value={value}>
+    <CoinValuePercentage value={value} size={size}>
       {isPercentage
         ? `${value < 0 ? "" : "+"}${value.toFixed()}%`
         : `$${

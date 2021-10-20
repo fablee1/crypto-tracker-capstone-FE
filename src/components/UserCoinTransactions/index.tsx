@@ -18,7 +18,7 @@ const UserCoinTransactions = ({
 
   return (
     <div className="mt-3">
-      <Card title="Coin Transactions" height="350px">
+      <Card height="350px">
         {coinInPortfolio ? (
           <Table className="text-white">
             <thead>

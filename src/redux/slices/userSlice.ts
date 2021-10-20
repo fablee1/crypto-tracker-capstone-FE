@@ -53,11 +53,10 @@ export const userSlice = createSlice({
       })
     },
     addTransaction: (state, action) => {
-      console.log(action.payload.coinData)
       if (action.payload.coinData !== null) {
         state.coins[action.payload.coinData.id] = action.payload.coinData
       }
-      state.me.transactions.push(action.payload.trans)
+      state.me.transactions.push(action.payload.trans[0])
       state.me.portfolio = action.payload.portfolio
     },
   },

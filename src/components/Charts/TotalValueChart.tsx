@@ -59,6 +59,12 @@ const TotalValueChart = ({ data }: TotalValueChartProps) => {
             left: 0,
             bottom: 0,
           }}>
+          <defs>
+            <linearGradient id="colorTotalValue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0.5} />
+            </linearGradient>
+          </defs>
           <XAxis
             dataKey="timestamp"
             tickFormatter={getDayMonthString}
@@ -72,7 +78,7 @@ const TotalValueChart = ({ data }: TotalValueChartProps) => {
             tickFormatter={(tick: number) => (tick > 999 ? `${tick / 1000}k` : `${tick}`)}
           />
           <Tooltip />
-          <Area dataKey="value" stroke="#8884d8" fill="#8884d8" />
+          <Area dataKey="value" stroke="#8884d8" fill="url(#colorTotalValue)" />
         </AreaChart>
       </ResponsiveContainer>
     </>

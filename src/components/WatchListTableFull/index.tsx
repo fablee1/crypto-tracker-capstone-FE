@@ -23,7 +23,8 @@ const WatchListTableFull = () => {
     <Table className="text-white position-relative">
       <thead>
         <tr>
-          <th className="text-center">Rank</th>
+          <th></th>
+          <th className="text-start">Rank</th>
           <th>Name</th>
           <th className="text-end">Price</th>
           <th className="text-center">24h %</th>
@@ -58,6 +59,7 @@ const WatchListTableFull = () => {
                 market_cap={coin.market_cap}
                 volume={coin.total_volume as number}
                 circ_supply={coin.circulating_supply as number}
+                favouriteBtn
               />
             )
           })}

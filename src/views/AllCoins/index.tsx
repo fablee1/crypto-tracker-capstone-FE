@@ -1,4 +1,3 @@
-import { Heading } from "./styled"
 import Table from "react-bootstrap/Table"
 import { useEffect, useState } from "react"
 import backend from "../../backend"
@@ -42,7 +41,6 @@ const AllCoins = () => {
     <div className="px-5">
       <TopNav title="All Cryptocurrencies" />
       <Card className="px-5 py-4">
-        <Heading>All Cryptocurrencies</Heading>
         <Table className="text-white" borderless>
           <thead>
             <tr>

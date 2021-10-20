@@ -29,13 +29,41 @@ export const NewsHeaderBlockHeader = styled.div`
 `
 
 export const NewsCardsContainer = styled.div`
-  border: 1px solid #ffffff47;
-  margin: 0 30px 30px 30px;
+  border: 1px solid #ffffff03;
+  border-top: none;
+  margin: 0 40px 30px 40px;
   padding: 25px;
   border-radius: 15px;
+  box-shadow: 0 0 250px 25px inset rgb(30, 36, 52);
 `
 
 export const NewsTypeBtn = styled(Button)`
   border-bottom-left-radius: ${(props) => props.left && "0px"};
   border-bottom-right-radius: ${(props) => props.right && "0px"};
+  background-color: ${(props) => (props.selected ? "#181d2a" : "transparent")};
+  color: ${(props) => (props.selected ? "white" : "#ffffff89")};
+  border: none;
+  box-shadow: none;
+  width: 200px;
+  font-size: 20px;
+  &:focus {
+    background-color: #181d2a;
+    box-shadow: none;
+    border: none;
+  }
+  &:hover {
+    background-color: #181d2a;
+    box-shadow: none;
+    border: none;
+  }
+  &:active {
+    background-color: #181d2a;
+    box-shadow: none;
+    border: none;
+  }
+  &:active:focus {
+    background-color: #181d2a;
+    box-shadow: none;
+    border: none;
+  }
 `

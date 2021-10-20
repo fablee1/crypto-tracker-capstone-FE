@@ -16,6 +16,10 @@ import {
 } from "./styled"
 import NoCoinCover from "../../views/CoinPage/NoCoinCover"
 
+const formatNum = (num: number) => {
+  return parseFloat(num.toFixed(2)).toLocaleString()
+}
+
 const UserCoinStats = ({ id }: { id: string }) => {
   const userPortfolio = useAppSelector(selectUserPortfolio)
   const userCoins = useAppSelector(selectUserCoins)
@@ -42,10 +46,13 @@ const UserCoinStats = ({ id }: { id: string }) => {
       const invested = coinPortfolioData.amount * coinPortfolioData.averageBuyPrice
       const roi = ((coinValue - invested) / invested) * 100
 
+      const today = new Date()
+
       const userCoinTrans = userTransactions.filter((trans) => trans.coin === id)
-      const firstTransDate = userCoinTrans.sort(
-        (a, b) => a.date.valueOf() - b.date.valueOf()
-      )[0].date
+      const firstTransDate =
+        userCoinTrans.length === 0
+          ? today
+          : userCoinTrans.sort((a, b) => a.date.valueOf() - b.date.valueOf())[0].date
 
       const portfolioPercentage =
         (coinValue /
@@ -80,25 +87,27 @@ const UserCoinStats = ({ id }: { id: string }) => {
                 <Row>
                   <StatsInfoBlock
                     title="Holding now"
-                    value={`${statsData.amount.toLocaleString()} ${statsData.symbol.toUpperCase()}`}
+                    value={`${formatNum(
+                      statsData.amount
+                    )} ${statsData.symbol.toUpperCase()}`}
                   />
                   <StatsInfoBlock
                     title="Coin Value"
-                    value={`$${statsData.coinValue.toLocaleString()}`}
+                    value={`$${formatNum(statsData.coinValue)}`}
                   />
                   <StatsInfoBlock
                     title="Invested"
-                    value={`$${statsData.invested.toLocaleString()}`}
+                    value={`$${formatNum(statsData.invested)}`}
                   />
                   <StatsInfoBlock
                     title="Average Buy Price"
-                    value={`$${statsData.averageBuyPrice.toLocaleString()}`}
+                    value={`$${formatNum(statsData.averageBuyPrice)}`}
                   />
                 </Row>
               </Col>
               <Col xs={12} md={6}>
                 <Row>
-                  <StatsInfoBlock title="ROI" value={`${statsData.roi.toFixed(2)}%`} />
+                  <StatsInfoBlock title="ROI" value={`${formatNum(statsData.roi)}%`} />
                   <StatsInfoBlock
                     title="Total Transactions"
                     value={`${statsData.totalTransCount}`}
@@ -109,7 +118,7 @@ const UserCoinStats = ({ id }: { id: string }) => {
                   />
                   <StatsInfoBlock
                     title="Portfolio %"
-                    value={`${statsData.portfolioPercentage.toFixed(2)}%`}
+                    value={`${formatNum(statsData.portfolioPercentage)}%`}
                   />
                 </Row>
               </Col>

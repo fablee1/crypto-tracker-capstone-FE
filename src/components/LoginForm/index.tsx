@@ -1,6 +1,5 @@
 import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import backend from "../../backend"
 import { useHistory } from "react-router-dom"
 import { MyFormControl, SignInUpBtn } from "./styled"
@@ -27,7 +26,9 @@ const LoginForm = () => {
           type="text"
           placeholder="Email / Username"
           value={credentials.login}
-          onChange={(e: any) => setCredentials({ ...credentials, login: e.target.value })}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setCredentials({ ...credentials, login: e.target.value })
+          }
         />
       </Form.Group>
 
@@ -37,7 +38,7 @@ const LoginForm = () => {
           type="password"
           placeholder="Password"
           value={credentials.password}
-          onChange={(e: any) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setCredentials({ ...credentials, password: e.target.value })
           }
         />

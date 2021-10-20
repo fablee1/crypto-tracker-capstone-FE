@@ -7,7 +7,7 @@ const NoCoinCover = () => {
       <CryptoCover fill="white" className="svgAnimation" />
       <CoverText>
         <div>You don't have this coin in your portfolio yet.</div>
-        <div>Add you first transaction to see stats.</div>
+        <div>Add your first transaction to see stats.</div>
       </CoverText>
     </NoCoinCoverDiv>
   )

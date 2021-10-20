@@ -3,8 +3,6 @@ import TopNav from "../../components/TopNav"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import {
   NewsCardsContainer,
-  NewsHeaderBlock,
-  NewsHeaderBlockHeader,
   NewsPageContentWrapper,
   NewsTypeBtn,
   TickerWidgetWrapper,
@@ -37,9 +35,6 @@ const News = () => {
             title="tickerNews"
             src="https://widgetscdn.cryptomood.com/ticker-widget?theme=dark"></iframe>
         </TickerWidgetWrapper>
-        <NewsHeaderBlock>
-          <NewsHeaderBlockHeader>News</NewsHeaderBlockHeader>
-        </NewsHeaderBlock>
         <NewsCardsWrapper newsType={newsType} setType={setNewsType}>
           <Row>
             {news ? (
@@ -75,12 +70,18 @@ interface NewsCardsWrapperProps {
 const NewsCardsWrapper = ({ children, newsType, setType }: NewsCardsWrapperProps) => {
   return (
     <>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-5">
         <ButtonGroup aria-label="News Type">
-          <NewsTypeBtn left onClick={() => setType("latest")}>
+          <NewsTypeBtn
+            left
+            onClick={() => setType("latest")}
+            selected={newsType === "latest"}>
             Latest
           </NewsTypeBtn>
-          <NewsTypeBtn right onClick={() => setType("popular")}>
+          <NewsTypeBtn
+            right
+            onClick={() => setType("popular")}
+            selected={newsType === "popular"}>
             Popular
           </NewsTypeBtn>
         </ButtonGroup>
