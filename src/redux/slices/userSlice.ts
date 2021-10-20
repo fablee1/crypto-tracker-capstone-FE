@@ -47,12 +47,17 @@ export const userSlice = createSlice({
   reducers: {
     updatePrices: (state, action) => {
       action.payload.forEach((update: { coin: string; price: number }) => {
-        console.log(update)
-        console.log(state.coins[update.coin])
         state.coins[update.coin].current_price = update.price
         state.coins[update.coin].last1hPrice?.shift()
         state.coins[update.coin].last1hPrice?.push(update.price)
       })
+    },
+    addTransaction: (state, action) => {
+      if (action.payload.coinData !== null) {
+        state.coins[action.payload.coinData.id] = action.payload.coinData
+      }
+      state.me.transactions.push(action.payload.trans[0])
+      state.me.portfolio = action.payload.portfolio
     },
   },
   extraReducers: (builder) => {
@@ -81,6 +86,6 @@ export const selectUserPortfolio = (state: RootState) => state.user.me.portfolio
 export const selectUserFavourites = (state: RootState) => state.user.me.favourites
 export const selectUserTransactions = (state: RootState) => state.user.me.transactions
 
-export const { updatePrices } = userSlice.actions
+export const { updatePrices, addTransaction } = userSlice.actions
 
 export default userSlice.reducer

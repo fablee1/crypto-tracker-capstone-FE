@@ -1,18 +1,18 @@
-import { MyNav, NavWrapper } from "./styled"
+import { MyNav, NavWrapper, StyledLink } from "./styled"
 import { AiFillHome, AiFillStar } from "react-icons/ai"
 import { HiChartSquareBar } from "react-icons/hi"
 import { IoMdAlarm } from "react-icons/io"
-import { FaUserCircle } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { RiNewspaperFill } from "react-icons/ri"
+import { FaUserCircle, FaListAlt } from "react-icons/fa"
 
 const NavBar = () => {
   return (
     <NavWrapper>
       <MyNav defaultActiveKey="/home" className="flex-column">
         <MyNav.Link>
-          <Link to="/">
+          <StyledLink exact to="/" activeStyle={{ color: "#3861fb" }}>
             <AiFillHome size="2.2em" />
-          </Link>
+          </StyledLink>
         </MyNav.Link>
         <MyNav.Link>
           <HiChartSquareBar size="2.2em" />
@@ -21,11 +21,19 @@ const NavBar = () => {
           <IoMdAlarm size="2.2em" />
         </MyNav.Link>
         <MyNav.Link>
-          <AiFillStar size="2.2em" />
+          <StyledLink to="/watchlist" activeStyle={{ color: "#3861fb" }}>
+            <AiFillStar size="2.2em" />
+          </StyledLink>
         </MyNav.Link>
-        <MyNav.Link>Stats</MyNav.Link>
         <MyNav.Link>
-          <Link to="/cryptos">All Coins</Link>
+          <StyledLink to="/news" activeStyle={{ color: "#3861fb" }}>
+            <RiNewspaperFill size="2.1em" />
+          </StyledLink>
+        </MyNav.Link>
+        <MyNav.Link>
+          <StyledLink to="/cryptos" activeStyle={{ color: "#3861fb" }}>
+            <FaListAlt size="1.8em" />
+          </StyledLink>
         </MyNav.Link>
 
         <MyNav.Link className="mt-auto mb-4">

@@ -1,8 +1,8 @@
 import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import backend from "../../backend"
 import { useHistory } from "react-router-dom"
+import { MyFormControl, SignInUpBtn } from "./styled"
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ login: "", password: "" })
@@ -21,30 +21,31 @@ const LoginForm = () => {
   return (
     <Form onSubmit={(e) => handleLogin(e)}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address Or username</Form.Label>
-        <Form.Control
+        <Form.Label className="text-white">Email or username</Form.Label>
+        <MyFormControl
           type="text"
-          placeholder="Enter email or username"
+          placeholder="Email / Username"
           value={credentials.login}
-          onChange={(e) => setCredentials({ ...credentials, login: e.target.value })}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setCredentials({ ...credentials, login: e.target.value })
+          }
         />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
+        <Form.Label className="text-white">Password</Form.Label>
+        <MyFormControl
           type="password"
           placeholder="Password"
           value={credentials.password}
-          onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setCredentials({ ...credentials, password: e.target.value })
+          }
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <SignInUpBtn type="submit" className="my-4">
+        Sign In
+      </SignInUpBtn>
     </Form>
   )
 }

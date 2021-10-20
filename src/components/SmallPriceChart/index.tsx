@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts"
 
-interface SmallPriceGraphProps {
+interface SmallPriceChartProps {
   history: { timestamp: number; price: number; _id: string }[]
 }
 
-const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
+const SmallPriceChart = ({ history }: SmallPriceChartProps) => {
   const [data, setData] = useState<any>([])
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
     setData(newData)
   }, [history])
   return (
-    <ResponsiveContainer width={"99%"} height={50}>
+    <ResponsiveContainer width={"99%"} height={45}>
       <LineChart
         data={data}
         margin={{
@@ -28,7 +28,10 @@ const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
         <YAxis domain={["auto", "auto"]} hide={true} />
         <Line
           dataKey="price"
-          stroke={data[0]?.price < data.at(-1)?.price ? "green" : "red"}
+          stroke={
+            data[0]?.price < data.at(-1)?.price ? "rgb(79 194 128)" : "rgb(214 69 93)"
+          }
+          strokeWidth={2}
           dot={false}
         />
       </LineChart>
@@ -36,4 +39,4 @@ const SmallPriceGraph = ({ history }: SmallPriceGraphProps) => {
   )
 }
 
-export default SmallPriceGraph
+export default SmallPriceChart
